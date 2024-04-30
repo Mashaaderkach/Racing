@@ -14,9 +14,13 @@
 		4265FF432BCC3E7E005AC60A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4265FF422BCC3E7E005AC60A /* Assets.xcassets */; };
 		4265FF462BCC3E7E005AC60A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 4265FF452BCC3E7E005AC60A /* Base */; };
 		4265FF522BCC70EE005AC60A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4265FF512BCC70EE005AC60A /* GameViewController.swift */; };
+		42E571B62BDECCB40094CCA2 /* AchievmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E571B52BDECCB40094CCA2 /* AchievmentsViewController.swift */; };
+		42E571B82BDECCC60094CCA2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E571B72BDECCC60094CCA2 /* SettingsViewController.swift */; };
+		69936CDA0F08CCFE65239E5B /* Pods_Racing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7CAACB987187087D6B0E928 /* Pods_Racing.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0487E8D94A8DB2E48C9CD1F7 /* Pods-Racing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Racing.release.xcconfig"; path = "Target Support Files/Pods-Racing/Pods-Racing.release.xcconfig"; sourceTree = "<group>"; };
 		4265FF362BCC3E7C005AC60A /* Racing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Racing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4265FF392BCC3E7C005AC60A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4265FF3B2BCC3E7C005AC60A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +30,10 @@
 		4265FF452BCC3E7E005AC60A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4265FF472BCC3E7E005AC60A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4265FF512BCC70EE005AC60A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		42E571B52BDECCB40094CCA2 /* AchievmentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievmentsViewController.swift; sourceTree = "<group>"; };
+		42E571B72BDECCC60094CCA2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		A9D69143512B41F0393B92D0 /* Pods-Racing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Racing.debug.xcconfig"; path = "Target Support Files/Pods-Racing/Pods-Racing.debug.xcconfig"; sourceTree = "<group>"; };
+		F7CAACB987187087D6B0E928 /* Pods_Racing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Racing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +41,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69936CDA0F08CCFE65239E5B /* Pods_Racing.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1DE5E049E8603F7946626B9D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A9D69143512B41F0393B92D0 /* Pods-Racing.debug.xcconfig */,
+				0487E8D94A8DB2E48C9CD1F7 /* Pods-Racing.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		4265FF2D2BCC3E7C005AC60A = {
 			isa = PBXGroup;
 			children = (
 				4265FF382BCC3E7C005AC60A /* Racing */,
 				4265FF372BCC3E7C005AC60A /* Products */,
+				1DE5E049E8603F7946626B9D /* Pods */,
+				C2813CC712F52F9E53E92B8E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,12 +82,22 @@
 				4265FF3B2BCC3E7C005AC60A /* SceneDelegate.swift */,
 				4265FF3D2BCC3E7C005AC60A /* ViewController.swift */,
 				4265FF512BCC70EE005AC60A /* GameViewController.swift */,
+				42E571B52BDECCB40094CCA2 /* AchievmentsViewController.swift */,
+				42E571B72BDECCC60094CCA2 /* SettingsViewController.swift */,
 				4265FF3F2BCC3E7C005AC60A /* Main.storyboard */,
 				4265FF422BCC3E7E005AC60A /* Assets.xcassets */,
 				4265FF442BCC3E7E005AC60A /* LaunchScreen.storyboard */,
 				4265FF472BCC3E7E005AC60A /* Info.plist */,
 			);
 			path = Racing;
+			sourceTree = "<group>";
+		};
+		C2813CC712F52F9E53E92B8E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F7CAACB987187087D6B0E928 /* Pods_Racing.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +107,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4265FF4A2BCC3E7E005AC60A /* Build configuration list for PBXNativeTarget "Racing" */;
 			buildPhases = (
+				DA069843DE7A3858CD8141EA /* [CP] Check Pods Manifest.lock */,
 				4265FF322BCC3E7C005AC60A /* Sources */,
 				4265FF332BCC3E7C005AC60A /* Frameworks */,
 				4265FF342BCC3E7C005AC60A /* Resources */,
+				ED86A25DA8D3205BBCFEAAC3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -136,6 +168,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		DA069843DE7A3858CD8141EA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Racing-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ED86A25DA8D3205BBCFEAAC3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Racing/Pods-Racing-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Racing/Pods-Racing-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Racing/Pods-Racing-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4265FF322BCC3E7C005AC60A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -145,6 +219,8 @@
 				4265FF3E2BCC3E7C005AC60A /* ViewController.swift in Sources */,
 				4265FF3A2BCC3E7C005AC60A /* AppDelegate.swift in Sources */,
 				4265FF3C2BCC3E7C005AC60A /* SceneDelegate.swift in Sources */,
+				42E571B62BDECCB40094CCA2 /* AchievmentsViewController.swift in Sources */,
+				42E571B82BDECCC60094CCA2 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,7 +283,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -270,7 +346,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -291,6 +367,7 @@
 		};
 		4265FF4B2BCC3E7E005AC60A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A9D69143512B41F0393B92D0 /* Pods-Racing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -323,6 +400,7 @@
 		};
 		4265FF4C2BCC3E7E005AC60A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0487E8D94A8DB2E48C9CD1F7 /* Pods-Racing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

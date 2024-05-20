@@ -38,10 +38,10 @@ class GameViewController: UIViewController {
     }()
     
     
-    private var blackCar: UIImageView = {
-        let blackCar = UIImageView()
-        blackCar.image = UIImage(named: "BlackCar")
-        return blackCar
+    private var mainCar: UIImageView = {
+        let mainCar = UIImageView()
+        mainCar.image = UIImage(named: "BlackCar")
+        return mainCar
     }()
     
     private var whiteCar: UIImageView = {
@@ -129,7 +129,7 @@ class GameViewController: UIViewController {
         addLeftStone()
         addLeftButton()
         addRightButton()
-        addBlackCar()
+        addMainCar()
         addWhiteCar()
         startCountDownTimer()
         
@@ -200,7 +200,7 @@ class GameViewController: UIViewController {
     private func addLeftStone() {
         mainArea.addSubview(leftStone)
         leftStone.snp.makeConstraints { make in
-            make.bottom.equalTo(mainArea.snp.bottom).offset(-150)
+            make.bottom.equalTo(mainArea.snp.bottom).offset(-200)
             make.left.equalTo(mainArea.snp.left).offset(100)
             make.width.equalTo(95)
             make.height.equalTo(95)
@@ -210,7 +210,7 @@ class GameViewController: UIViewController {
     private func addRightStone() {
         mainArea.addSubview(rightStone)
         rightStone.snp.makeConstraints { make in
-            make.top.equalTo(mainArea.snp.top).offset(75)
+            make.top.equalTo(mainArea.snp.top).offset(55)
             make.right.equalTo(mainArea.snp.right).offset(-100)
             make.width.equalTo(95)
             make.height.equalTo(95)
@@ -228,7 +228,7 @@ class GameViewController: UIViewController {
         let action = UIAction { _ in
             UIView.animate(withDuration: 0.3) {
                 self.currentDirection = Direction.left
-                self.moveBlackCar()
+                self.moveMainCar()
             }
         }
         leftButton.addAction(action, for: .touchUpInside)
@@ -245,15 +245,15 @@ class GameViewController: UIViewController {
         let action = UIAction { _ in
             UIView.animate(withDuration: 0.3) {
                 self.currentDirection = Direction.right
-                self.moveBlackCar()
+                self.moveMainCar()
             }
         }
         rightButton.addAction(action, for: .touchUpInside)
     }
     
-    private func addBlackCar() {
-        mainArea.addSubview(blackCar)
-        blackCar.snp.makeConstraints { make in
+    private func addMainCar() {
+        mainArea.addSubview(mainCar)
+        mainCar.snp.makeConstraints { make in
             make.left.equalTo(mainArea.snp.right).offset(-180)
             make.bottom.equalTo(mainArea.snp.bottom).offset(-100)
             make.width.equalTo(95)
@@ -274,18 +274,18 @@ class GameViewController: UIViewController {
     
     
     
-    private func moveBlackCar() {
+    private func moveMainCar() {
         UIView.animate(withDuration: 0.3) {
             switch self.currentDirection {
             case .left:
-                self.blackCar.frame.origin.x -= self.leftRightMovingDistance
+                self.mainCar.frame.origin.x -= self.leftRightMovingDistance
             case .right:
-                self.blackCar.frame.origin.x += self.leftRightMovingDistance
+                self.mainCar.frame.origin.x += self.leftRightMovingDistance
             }
         } completion: { _ in
-            if self.blackCar.frame.intersects(self.whiteCar.frame) ||
-                self.blackCar.frame.intersects(self.leftStone.frame) ||
-                self.blackCar.frame.intersects(self.rightStone.frame) {
+            if self.mainCar.frame.intersects(self.whiteCar.frame) ||
+                self.mainCar.frame.intersects(self.leftStone.frame) ||
+                self.mainCar.frame.intersects(self.rightStone.frame) {
                 self.showBoomImage()
             }
         }

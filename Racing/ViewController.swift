@@ -147,6 +147,7 @@ class ViewController: UIViewController {
     
     private func settingsButtonPressed() {
         let controller = SettingsViewController()
+        
         navigationController?.pushViewController(controller, animated: true)
     }
     

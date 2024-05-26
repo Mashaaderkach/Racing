@@ -22,6 +22,12 @@ class GameViewController: UIViewController {
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     
+    private var selectedCar: String = ""
+    private var selectedObstacle: String = ""
+    
+    private var currentCarIndex: Int = 0
+    private var currentObstacleIndex: Int = 0
+    
     
     private var countDownLabel: UILabel = {
         let countDownLabel = UILabel()
@@ -132,10 +138,10 @@ class GameViewController: UIViewController {
         addMainCar()
         addWhiteCar()
         startCountDownTimer()
-        
-        
+        loadObject(forKey: "savedData")
+       // loadSettings()
     }
- 
+    
     
     // MARK: - Custom Methods
     
@@ -399,9 +405,25 @@ class GameViewController: UIViewController {
         timer?.fire()
     }
     
+    // MARK: - UserDefaults
     
+
     
-}
+    func loadObject(forKey key: String) -> Settings? { // загружаю настройки из UserDefaults
+        if let dictionary = UserDefaults.standard.dictionary(forKey: key),
+           let currentCarName = dictionary[Keys.currentCarName] as? String,
+           let currentObstacleName = dictionary[Keys.currentObstacleName] as? String,
+           let userName = dictionary[Keys.userName] as? String
+        {
+            self.mainCar.image = UIImage(named: currentCarName)
+            self.leftStone.image = UIImage(named: currentObstacleName)
+            self.rightStone.image = UIImage(named: currentObstacleName)
+            return Settings(currentCarName: Keys.currentCarName, currentObstacleName: Keys.currentObstacleName, userName: Keys.userName)
+        }
+        return nil
+    }
+    }
+
 
 
 

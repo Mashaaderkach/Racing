@@ -12,9 +12,12 @@ private extension CGFloat {
     static let buttonsLeftOffset: CGFloat = 40
     static let buttonsRightInset: CGFloat = 40
     static let buttonsHeight: CGFloat = 40
+    static let buttonsWidth: CGFloat = 40
 }
 
 class SettingsViewController: UIViewController {
+    
+    
     
     // MARK: - Properties
     
@@ -23,6 +26,24 @@ class SettingsViewController: UIViewController {
     
     private let obstacleImagesArray = ["Stone", "Tree", "Tumbleweed", "Hole"]
     private var currentObstacleIndex = 1
+    
+    
+    
+    private var Press = ""
+    
+    
+//    
+//    var selectedCar: String = ""
+//    var selectedObstacle: String = ""
+    
+    
+    private let backButton: UIButton = {
+        let backButton = UIButton()
+        backButton.setTitle("Back", for: .normal)
+        backButton.setTitleColor(.black, for: .normal)
+        backButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .heavy)
+        return backButton
+    }()
     
     private let backgroundView: UIImageView = {
         let backgroundView = UIImageView()
@@ -76,13 +97,23 @@ class SettingsViewController: UIViewController {
     
     
     
+    private var userNameTextField: UITextField = {
+        let textField = UITextField()
+        textField.font = UIFont.systemFont(ofSize: 35, weight: .bold)
+        textField.textColor = .systemOrange
+        textField.textAlignment = .center
+        textField.borderStyle = .roundedRect
+        textField.backgroundColor = .white
+        return textField
+    }()
+    
     
     
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // navigationItem.hidesBackButton = true
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         addBackground()
         addLeftCarSwitchButton()
         addSelectedCarImage()
@@ -90,7 +121,26 @@ class SettingsViewController: UIViewController {
         addSelectedObstacleImage()
         addLeftObstacleSwitchButton()
         addRightObstacleSwitchButton()
+        addBackButton()
+        addUserNameTextField()
         
+    }
+    
+    private func addBackButton() {
+        view.addSubview(backButton)
+        backButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(50)
+            make.left.equalToSuperview().offset(40)
+            make.width.equalTo(CGFloat.buttonsHeight)
+            make.height.equalTo(CGFloat.buttonsWidth)
+        }
+        let action = UIAction { _ in
+            
+            
+            
+            self.pressedBackButton()
+        }
+        backButton.addAction(action, for: .touchUpInside)
     }
     
     
@@ -182,103 +232,125 @@ class SettingsViewController: UIViewController {
         rightObstacleSwitchButton.addAction(action, for: .touchUpInside)
     }
     
+    private func addUserNameTextField() {
+        view.addSubview(userNameTextField)
+        userNameTextField.snp.makeConstraints { make in
+            make.top.equalTo(selectedObstacleImage.snp.bottom).offset(40)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(200)
+            make.height.equalTo(100)
+        }
+    }
     
     
     private func switchToNextCar() {
-        let nextIndex = (currentCarIndex + 1) % carImagesArray.count
-        let nextCarImageView = UIImageView(image: UIImage(named: carImagesArray[nextIndex]))
+        let nextCarIndex = (currentCarIndex + 1) % carImagesArray.count
+        let nextCarImageView = UIImageView(image: UIImage(named: carImagesArray[nextCarIndex]))
         
         nextCarImageView.frame = selectedCarImage.frame
         nextCarImageView.frame.origin.x = -view.frame.width
         
         view.addSubview(nextCarImageView)
         
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.01, animations: {
             nextCarImageView.frame.origin.x = self.selectedCarImage.frame.origin.x
         }, completion: { _ in
             self.selectedCarImage.image = nextCarImageView.image
             nextCarImageView.removeFromSuperview()
         })
         
-        currentCarIndex = nextIndex
+        currentCarIndex = nextCarIndex
+        
+        
     }
     
     private func switchToPreviousCar() {
-        let previousIndex = (currentCarIndex - 1 + carImagesArray.count) % carImagesArray.count
-        let previousCarImageView = UIImageView(image: UIImage(named: carImagesArray[previousIndex]))
+        let previousCarIndex = (currentCarIndex - 1 + carImagesArray.count) % carImagesArray.count
+        let previousCarImageView = UIImageView(image: UIImage(named: carImagesArray[previousCarIndex]))
         
         previousCarImageView.frame = selectedCarImage.frame
         previousCarImageView.frame.origin.x = view.frame.width
         
         view.addSubview(previousCarImageView)
         
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.01, animations: {
             previousCarImageView.frame.origin.x = self.selectedCarImage.frame.origin.x
         }, completion: { _ in
             self.selectedCarImage.image = previousCarImageView.image
             previousCarImageView.removeFromSuperview()
         })
         
-        currentCarIndex = previousIndex
+        currentCarIndex = previousCarIndex
+        
     }
     
     
     private func switchToNextObstacle() {
-        let nextIndex = (currentObstacleIndex + 1) % obstacleImagesArray.count
-        let nextObstacleImageView = UIImageView(image: UIImage(named: obstacleImagesArray[nextIndex]))
+        let nextObstacleIndex = (currentObstacleIndex + 1) % obstacleImagesArray.count
+        let nextObstacleImageView = UIImageView(image: UIImage(named: obstacleImagesArray[nextObstacleIndex]))
         
         nextObstacleImageView.frame = selectedObstacleImage.frame
         nextObstacleImageView.frame.origin.x = -view.frame.width
         
         view.addSubview(nextObstacleImageView)
         
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.01, animations: {
             nextObstacleImageView.frame.origin.x = self.selectedObstacleImage.frame.origin.x
         }, completion: { _ in
             self.selectedObstacleImage.image = nextObstacleImageView.image
             nextObstacleImageView.removeFromSuperview()
         })
         
-        currentObstacleIndex = nextIndex
+        currentObstacleIndex = nextObstacleIndex
+        
     }
     
     private func switchToPreviousObstacle() {
-        let previousIndex = (currentObstacleIndex - 1 + obstacleImagesArray.count) % obstacleImagesArray.count
-        let previousObstacleImageView = UIImageView(image: UIImage(named: obstacleImagesArray[previousIndex]))
+        let previousObstacleIndex = (currentObstacleIndex - 1 + obstacleImagesArray.count) % obstacleImagesArray.count
+        let previousObstacleImageView = UIImageView(image: UIImage(named: obstacleImagesArray[previousObstacleIndex]))
         
         previousObstacleImageView.frame = selectedObstacleImage.frame
         previousObstacleImageView.frame.origin.x = view.frame.width
         
         view.addSubview(previousObstacleImageView)
         
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.01, animations: {
             previousObstacleImageView.frame.origin.x = self.selectedObstacleImage.frame.origin.x
         }, completion: { _ in
             self.selectedObstacleImage.image = previousObstacleImageView.image
             previousObstacleImageView.removeFromSuperview()
         })
         
-        currentObstacleIndex = previousIndex
+        currentObstacleIndex = previousObstacleIndex
+        
+    }
+    
+    private func saveObject(settings: Settings, forKey key: String) {
+        let dictionary: [String: Any] = [Keys.currentCarName: settings.currentCarName, Keys.currentObstacleName: settings.currentObstacleName, Keys.userName: settings.userName]
+        UserDefaults.standard.set(dictionary, forKey: key)
     }
     
     
     
+    private func save() {
+        let settingObj = Settings(currentCarName: "1", currentObstacleName: "1", userName: "") // устанавливаю начальные значения
+        settingObj.currentCarName = self.carImagesArray[self.currentCarIndex] // устанавливаю имя текущей машинки
+        settingObj.currentObstacleName = self.obstacleImagesArray[self.currentObstacleIndex] // устанавливаю имя текущего препятствия
+        
+        if let userName = userNameTextField.text {
+            settingObj.userName = userName // устанавливаю имя в Settings, если оно есть
+        }
+        
+        self.saveObject(settings: settingObj , forKey: "savedData") // сохраняю объект настроек в UserDefaults (settings - значение, forKey - ключ)
+    }
     
+    // MARK: - Navigation
+    
+    private func pressedBackButton() {
+        self.save()
+        navigationController?.popToRootViewController(animated: true)
+    }
     
     
     
 }
-
-
-
-
-
-
-
-
-// MARK: - Navigation
-
-
-
-
-

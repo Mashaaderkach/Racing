@@ -51,15 +51,15 @@ class SettingsViewController: UIViewController {
     private let avatarImageView: UIImageView = {
         let avatarImageView = UIImageView()
         avatarImageView.backgroundColor = .clear
-//        avatarImageView.image = UIImage(named: "Avatar")
         avatarImageView.layer.cornerRadius = 20
+        avatarImageView.clipsToBounds = true
         return avatarImageView
     }()
     
     private let chooseAvatarButton: UIButton = {
         let chooseAvatarButton = UIButton()
         chooseAvatarButton.setTitleColor(.green, for: .normal)
-        chooseAvatarButton.backgroundColor = .blue
+        chooseAvatarButton.backgroundColor = .clear
         chooseAvatarButton.layer.cornerRadius = 20
         return chooseAvatarButton
     }()
@@ -187,7 +187,7 @@ class SettingsViewController: UIViewController {
             make.width.equalTo(40)
         }
         let action = UIAction { _ in
-//            self.switchToPreviousCar()
+            self.showAvatarPickerAlert()
         }
         chooseAvatarButton.addAction(action, for: .touchUpInside)
     }
@@ -399,6 +399,39 @@ class SettingsViewController: UIViewController {
             }
     }
     
+    private func showAvatarPickerAlert() {
+        let alert = UIAlertController(title: "Choose Avatar", message: nil, preferredStyle: .actionSheet)
+        
+        let camera = UIAlertAction(title: "Take photo", style: .default) { _ in
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                self.showImagePicker(sourceType: .camera)
+            }
+            
+        }
+        alert.addAction(camera)
+       
+        let photoLibrary = UIAlertAction(title: "Choose existing photo", style: .default) { _ in
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                self.showImagePicker(sourceType: .photoLibrary)
+            }
+        }
+        alert.addAction(photoLibrary)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
+    }
+    
+    private func showImagePicker(sourceType: UIImagePickerController.SourceType) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = sourceType
+        present(imagePicker, animated: true)
+    }
+    
+    
     // MARK: - Navigation
     
     private func pressedBackButton() {
@@ -408,4 +441,19 @@ class SettingsViewController: UIViewController {
     
     
     
+}
+
+extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        var chosenImage = UIImage()
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            chosenImage = image
+        } else if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            chosenImage = image
+        }
+        
+        avatarImageView.image = chosenImage
+        picker.dismiss(animated: true)
+    }
 }

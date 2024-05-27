@@ -411,14 +411,14 @@ class GameViewController: UIViewController {
     
     func loadObject(forKey key: String) -> Settings? { // загружаю настройки из UserDefaults
         if let dictionary = UserDefaults.standard.dictionary(forKey: key),
-           let currentCarName = dictionary[Keys.currentCarName] as? String,
-           let currentObstacleName = dictionary[Keys.currentObstacleName] as? String,
-           let userName = dictionary[Keys.userName] as? String
+           let currentCarName = dictionary[Keys.carKey] as? String,
+           let currentObstacleName = dictionary[Keys.obstacleKey] as? String,
+           let userName = dictionary[Keys.userNameKey] as? String
         {
             self.mainCar.image = UIImage(named: currentCarName)
             self.leftStone.image = UIImage(named: currentObstacleName)
             self.rightStone.image = UIImage(named: currentObstacleName)
-            return Settings(currentCarName: Keys.currentCarName, currentObstacleName: Keys.currentObstacleName, userName: Keys.userName)
+            return Settings(currentCarName: Keys.carKey, currentObstacleName: Keys.obstacleKey, userName: Keys.userNameKey)
         }
         return nil
     }

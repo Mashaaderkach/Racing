@@ -7,4 +7,5 @@ target 'Racing' do
 
   # Pods for Racing
 pod 'SnapKit'
+pod 'KeychainSwift', '~> 20.0'
 end

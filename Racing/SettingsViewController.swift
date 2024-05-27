@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import KeychainSwift
 
 private extension CGFloat {
     static let buttonsLeftOffset: CGFloat = 40
@@ -27,21 +28,17 @@ class SettingsViewController: UIViewController {
     private let obstacleImagesArray = ["Stone", "Tree", "Tumbleweed", "Hole"]
     private var currentObstacleIndex = 1
     
+    private let secretValue = "Some secret value"
+    private let key = "Main key"
     
-    
-    private var Press = ""
-    
-    
-//    
-//    var selectedCar: String = ""
-//    var selectedObstacle: String = ""
-    
+    private let saveLoadManager = SaveLoadManager()
+    private let imageManager = ImageManager()
     
     private let backButton: UIButton = {
         let backButton = UIButton()
-        backButton.setTitle("Back", for: .normal)
+        backButton.setTitle("< Back", for: .normal)
         backButton.setTitleColor(.black, for: .normal)
-        backButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .heavy)
+        backButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         return backButton
     }()
     
@@ -49,6 +46,22 @@ class SettingsViewController: UIViewController {
         let backgroundView = UIImageView()
         backgroundView.image = UIImage(named: "SettingsBackground")
         return backgroundView
+    }()
+    
+    private let avatarImageView: UIImageView = {
+        let avatarImageView = UIImageView()
+        avatarImageView.backgroundColor = .clear
+//        avatarImageView.image = UIImage(named: "Avatar")
+        avatarImageView.layer.cornerRadius = 20
+        return avatarImageView
+    }()
+    
+    private let chooseAvatarButton: UIButton = {
+        let chooseAvatarButton = UIButton()
+        chooseAvatarButton.setTitleColor(.green, for: .normal)
+        chooseAvatarButton.backgroundColor = .blue
+        chooseAvatarButton.layer.cornerRadius = 20
+        return chooseAvatarButton
     }()
     
     private let leftCarSwitchButton: UIButton = {
@@ -115,6 +128,8 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         addBackground()
+        addAvatarImage()
+        addAvatarChooseButton()
         addLeftCarSwitchButton()
         addSelectedCarImage()
         addRightCarSwitchButton()
@@ -123,16 +138,17 @@ class SettingsViewController: UIViewController {
         addRightObstacleSwitchButton()
         addBackButton()
         addUserNameTextField()
-        
+        save()
+        load()
     }
     
     private func addBackButton() {
         view.addSubview(backButton)
         backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(50)
-            make.left.equalToSuperview().offset(40)
-            make.width.equalTo(CGFloat.buttonsHeight)
-            make.height.equalTo(CGFloat.buttonsWidth)
+            make.top.equalToSuperview().offset(60)
+            make.left.equalToSuperview().offset(15)
+            make.width.equalTo(70)
+            make.height.equalTo(CGFloat.buttonsHeight)
         }
         let action = UIAction { _ in
             
@@ -149,6 +165,31 @@ class SettingsViewController: UIViewController {
         backgroundView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    }
+    
+    private func addAvatarImage() {
+        
+        view.addSubview(avatarImageView)
+        avatarImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(60)
+            make.right.equalToSuperview().offset(-15)
+            make.height.equalTo(40)
+            make.width.equalTo(40)
+        }
+    }
+    
+    private func addAvatarChooseButton() {
+        view.addSubview(chooseAvatarButton)
+        chooseAvatarButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(60)
+            make.right.equalToSuperview().offset(-15)
+            make.height.equalTo(40)
+            make.width.equalTo(40)
+        }
+        let action = UIAction { _ in
+//            self.switchToPreviousCar()
+        }
+        chooseAvatarButton.addAction(action, for: .touchUpInside)
     }
     
     
@@ -235,10 +276,10 @@ class SettingsViewController: UIViewController {
     private func addUserNameTextField() {
         view.addSubview(userNameTextField)
         userNameTextField.snp.makeConstraints { make in
-            make.top.equalTo(selectedObstacleImage.snp.bottom).offset(40)
+            make.top.equalTo(selectedObstacleImage.snp.bottom).offset(100)
             make.centerX.equalToSuperview()
-            make.width.equalTo(200)
-            make.height.equalTo(100)
+            make.width.equalTo(250)
+            make.height.equalTo(50)
         }
     }
     
@@ -325,14 +366,7 @@ class SettingsViewController: UIViewController {
         
     }
     
-    private func saveObject(settings: Settings, forKey key: String) {
-        let dictionary: [String: Any] = [Keys.currentCarName: settings.currentCarName, Keys.currentObstacleName: settings.currentObstacleName, Keys.userName: settings.userName]
-        UserDefaults.standard.set(dictionary, forKey: key)
-    }
-    
-    
-    
-    private func save() {
+    private func createSettingsObject() { // создали объект и занесли в него значения
         let settingObj = Settings(currentCarName: "1", currentObstacleName: "1", userName: "") // устанавливаю начальные значения
         settingObj.currentCarName = self.carImagesArray[self.currentCarIndex] // устанавливаю имя текущей машинки
         settingObj.currentObstacleName = self.obstacleImagesArray[self.currentObstacleIndex] // устанавливаю имя текущего препятствия
@@ -341,13 +375,34 @@ class SettingsViewController: UIViewController {
             settingObj.userName = userName // устанавливаю имя в Settings, если оно есть
         }
         
-        self.saveObject(settings: settingObj , forKey: "savedData") // сохраняю объект настроек в UserDefaults (settings - значение, forKey - ключ)
+        self.saveSettingsObject(settingObj: settingObj , forKey: "savedObject") // сохраняю объект настроек в UserDefaults (settings - значение, forKey - ключ)
+    }
+    
+    
+    private func saveSettingsObject(settingObj: Settings, forKey key: String) {
+        let dictionary2 = [Keys.carKey: settingObj.currentCarName, Keys.obstacleKey: settingObj.currentObstacleName, Keys.userNameKey: settingObj.userName]
+        UserDefaults.standard.set(dictionary2, forKey: key)
+    }
+    
+    
+     func save() {
+        guard let image = UIImage(named: "Avatar") else { return }
+        if let name = saveLoadManager.saveImage(image) {
+            imageManager.saveImageName(name)
+        }
+    }
+    
+     func load() {
+        if let name = imageManager.loadImageName().first,
+               let image = saveLoadManager.load(from: name) {
+                avatarImageView.image = image
+            }
     }
     
     // MARK: - Navigation
     
     private func pressedBackButton() {
-        self.save()
+        self.createSettingsObject()
         navigationController?.popToRootViewController(animated: true)
     }
     

@@ -15,6 +15,8 @@
 		4265FF462BCC3E7E005AC60A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 4265FF452BCC3E7E005AC60A /* Base */; };
 		4265FF522BCC70EE005AC60A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4265FF512BCC70EE005AC60A /* GameViewController.swift */; };
 		429971A82BFC906B009AEBF6 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429971A72BFC906B009AEBF6 /* Keys.swift */; };
+		42C30F872C03755E00518C1D /* SaveLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C30F862C03755E00518C1D /* SaveLoadManager.swift */; };
+		42C30F892C03E66B00518C1D /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C30F882C03E66B00518C1D /* ImageManager.swift */; };
 		42E0D2BF2BFBF3950005FA87 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E0D2BE2BFBF3950005FA87 /* Settings.swift */; };
 		42E571B62BDECCB40094CCA2 /* AchievmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E571B52BDECCB40094CCA2 /* AchievmentsViewController.swift */; };
 		42E571B82BDECCC60094CCA2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E571B72BDECCC60094CCA2 /* SettingsViewController.swift */; };
@@ -33,6 +35,8 @@
 		4265FF472BCC3E7E005AC60A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4265FF512BCC70EE005AC60A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		429971A72BFC906B009AEBF6 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		42C30F862C03755E00518C1D /* SaveLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveLoadManager.swift; sourceTree = "<group>"; };
+		42C30F882C03E66B00518C1D /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		42E0D2BE2BFBF3950005FA87 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		42E571B52BDECCB40094CCA2 /* AchievmentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievmentsViewController.swift; sourceTree = "<group>"; };
 		42E571B72BDECCC60094CCA2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +98,8 @@
 				4265FF422BCC3E7E005AC60A /* Assets.xcassets */,
 				4265FF442BCC3E7E005AC60A /* LaunchScreen.storyboard */,
 				4265FF472BCC3E7E005AC60A /* Info.plist */,
+				42C30F862C03755E00518C1D /* SaveLoadManager.swift */,
+				42C30F882C03E66B00518C1D /* ImageManager.swift */,
 			);
 			path = Racing;
 			sourceTree = "<group>";
@@ -222,6 +228,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4265FF522BCC70EE005AC60A /* GameViewController.swift in Sources */,
+				42C30F892C03E66B00518C1D /* ImageManager.swift in Sources */,
+				42C30F872C03755E00518C1D /* SaveLoadManager.swift in Sources */,
 				429971A82BFC906B009AEBF6 /* Keys.swift in Sources */,
 				4265FF3E2BCC3E7C005AC60A /* ViewController.swift in Sources */,
 				4265FF3A2BCC3E7C005AC60A /* AppDelegate.swift in Sources */,

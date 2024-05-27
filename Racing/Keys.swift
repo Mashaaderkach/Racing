@@ -8,7 +8,7 @@
 import Foundation
 
 enum Keys {
-    static let currentCarName = "currentCarName"
-    static let currentObstacleName = "currentObstacleName"
-    static let userName = "userName"
+    static let carKey = "currentCarName"
+    static let obstacleKey = "currentObstacleName"
+    static let userNameKey = "userName"
 }

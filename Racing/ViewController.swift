@@ -100,7 +100,7 @@ class ViewController: UIViewController {
         playButton.addAction(playButtonAction, for: .touchUpInside)
         
         let achievmentsButtonAction = UIAction { _ in
-            self.playButtonPressed()
+            self.achievmentsButtonPressed()
         }
         achievmentsButton.addAction(achievmentsButtonAction, for: .touchUpInside)
         
